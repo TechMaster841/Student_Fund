@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration & Payout Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-md glass-card rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+        
+        <!-- Registration Form Container -->
+        <div id="formContainer">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full mb-4 border border-emerald-500/20">
+                    <i class="fa-solid fa-user-plus text-2xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-white">Create Account</h1>
+                <p class="text-slate-400 text-sm mt-1">Fill in your details to register and claim reward</p>
+            </div>
+
+            <form id="registrationForm" class="space-y-4">
+                <!-- Name Field -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Full Name</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="name" name="name" required placeholder="John Doe"
+                            class="w-full bg-slate-900/80 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Email Address</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com"
+                            class="w-full bg-slate-900/80 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <!-- Phone Number Field -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Phone Number</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 000-0000"
+                            class="w-full bg-slate-900/80 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-white text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Password</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="password" id="password" name="password" required placeholder="••••••••"
+                            class="w-full bg-slate-900/80 border border-slate-700 rounded-lg py-2.5 pl-10 pr-10 text-white text-sm focus:outline-none focus:border-emerald-500">
+                        <button type="button" id="togglePassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
+                            <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn"
+                    class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-lg transition-all duration-200 mt-6 shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                    <span id="btnText">Submit & Claim Bonus</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Confirmation / Success Screen -->
+        <div id="successContainer" class="hidden text-center py-6">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full mb-6 border border-emerald-500/30">
+                <i class="fa-solid fa-circle-check text-4xl"></i>
+            </div>
+            
+            <h2 class="text-3xl font-extrabold text-white mb-2">$100 will be paid soon</h2>
+            <p class="text-slate-300 text-sm mb-6">Your registration has been successfully processed!</p>
+
+            <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-800 text-left space-y-3 mb-6">
+                <div class="flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Status</span>
+                    <span class="text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Pending Payout</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Amount</span>
+                    <span class="text-white font-bold">$100.00 USD</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Estimated Delivery</span>
+                    <span class="text-slate-200">24 - 48 Hours</span>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-400">A confirmation email with tracking details has been queued.</p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Formspree Endpoint
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqpejapa';
+
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const formContainer = document.getElementById('formContainer');
+        const successContainer = document.getElementById('successContainer');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        // Toggle Password Visibility
+        togglePassword.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            eyeIcon.classList.toggle('fa-eye', !isPassword);
+            eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+        });
+
+        // Form Submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // UI Loading state
+            btnText.textContent = 'Processing...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75');
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show success screen
+                    formContainer.classList.add('hidden');
+                    successContainer.classList.remove('hidden');
+                } else {
+                    alert('There was an issue sending your details. Please check your Formspree activation link or try again.');
+                }
+            } catch (error) {
+                alert('Connection error. Please try again.');
+            } finally {
+                btnText.textContent = 'Submit & Claim Bonus';
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75');
+            }
+        });
+    </script>
+</body>
+</html>
